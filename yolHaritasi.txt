@@ -1,0 +1,37 @@
+segment/bolum bellekleri
+01-sayi toplamaca dosyasi
+====================
+
+yigin-fonksiyon cagrimi
+dosya okuma int 0x13
+gdt,cr0,a20 32 bit moda gecis
+====================
+
+
+C derleyicisi
+elf formati - linker
+VGA print()
+====================
+
+print_char(), print_int() ve print_string()
+printf()
+====================
+
+outb(), outw(), inw(), inb() VGA bellekleri
+====================
+
+font + printf()
+IDT, IDTR klavye girdisi
+====================
+
+VGA tty => VGA piksel
+cizgi, kare ve ucgen çizimi
+====================
+
+C++ ile Raycasting
+====================
+
+sinx, cosx ve tanx hesabi(buyuk ihtimal tablo kullanirim)
+C++ Raycasting => C Bazlama Yiyen Deniz Anasi
+
+

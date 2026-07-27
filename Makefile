@@ -5,4 +5,7 @@ all:
 	
 fs:
 	qemu-system-x86_64 boot.bin -full-screen
-	
+
+disam:
+	nasm -f bin boot.asm -o boot.bin
+	ndisasm boot.bin > debug/boot.txt
