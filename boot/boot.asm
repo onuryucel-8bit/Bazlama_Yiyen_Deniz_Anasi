@@ -1,3 +1,5 @@
+%define SEKTOR_ADETI 1
+
 org 0x7c00
 bits 16
 
@@ -16,7 +18,7 @@ mov [HDD_indeks], dl
 
 call enableA20
 
-;call diskOku
+call diskOku
 
 ;gdt tablosunu yukle
 lgdt [gdt_descriptor]
@@ -37,14 +39,14 @@ ret
 
 diskOku:
     mov ah, 0x2
-    mov al, 0x1 ;okunacak sektor adeti
+    mov al, SEKTOR_ADETI ;okunacak sektor adeti
     mov ch, 0x0 ;disk numarasi
     mov cl, 0x2 ;sektor numarasi
     mov dh, 0x0 ;kafa numarasi
     mov dl, [HDD_indeks] ;hangi hdd?
-    ;mov bx, yuklemeAdresi
+    mov bx, KabakCekirdegi
     int 0x13
-    ;jc .yuklemeHatasi
+    jc .yuklemeHatasi
 ret
 
 .yuklemeHatasi:
@@ -53,8 +55,8 @@ ret
 jmp $
 
 
-%include "gdt.asm"
-%include "io.asm"
+%include "boot/gdt.asm"
+%include "boot/io.asm"
 
 HDD_indeks: db 0
 
@@ -76,6 +78,9 @@ StartPM:
 
     ;vga adresi
     mov ebx, 0xb_8000
+
+    mov esp, 0x00f0_0002
+    mov ebp, 0x00f0_0000
 
     ;2000 => 80x25 dongu limiti
     ;herbir hucre 2 bayt
@@ -114,15 +119,7 @@ StartPM:
         cmp ecx, 2000   ;i ?= 2000
         jne .dongu
 
-    mov al, 'A'
-    mov ah, 0x47
-    mov [0xb_8000], ax
-
-    mov al, 'B'
-    mov ah, 0x24
-    mov [0xb_8002], ax
-
-    jmp $
+    jmp KabakCekirdegi
 
 
 ;0x7c0a - 0x7c00
@@ -135,3 +132,6 @@ StartPM:
 
 times 510 - ($ - $$) db 0
 dw 0xAA55
+
+;0x7e00 kabak cekirdegi buraya yuklenicek
+KabakCekirdegi:
