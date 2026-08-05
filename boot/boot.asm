@@ -1,4 +1,4 @@
-%define SEKTOR_ADETI 1
+%include "boot/SektorSayisi.asm"
 
 org 0x7c00
 bits 16

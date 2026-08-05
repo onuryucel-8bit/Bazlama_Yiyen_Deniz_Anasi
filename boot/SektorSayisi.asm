@@ -1,0 +1,1 @@
+%define SEKTOR_ADETI 5

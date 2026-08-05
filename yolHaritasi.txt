@@ -15,14 +15,19 @@ VGA print()
 
 print_char(), print_int() ve print_string()
 printf()
-====================
 
-outb(), outw(), inw(), inb() VGA bellekleri
+in/out a, b ;; a <= b
+outb(), outw(), inw(), inb(), 
+VGA bellekleri, 
+
+serial port, --serial stdio makefile
+
+sektor.py, 
+bios int 0x13 limiti
 ====================
 
 font + printf()
 IDT, IDTR klavye girdisi
-====================
 
 VGA tty => VGA piksel
 cizgi, kare ve ucgen çizimi
