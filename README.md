@@ -1,5 +1,7 @@
 <h1>Kaynakca</h1>
 
+[Osdev-Notes](https://github.com/dreamportdev/Osdev-Notes/tree/master)
+
 [brokenthorn](https://www.brokenthorn.com/Resources/OSDevIndex.html)
 
 [sphaerophoria](https://www.youtube.com/watch?v=gBykJMqDqH0&list=PL980gcR1LE3LBuWuSv2CL28HsfnpC4Qf7)

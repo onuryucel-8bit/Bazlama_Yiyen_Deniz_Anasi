@@ -1,4 +1,4 @@
-FLAGS = -m32 -ffreestanding -c
+FLAGS = -m32 -ffreestanding -c -I kernel
 
 OBJ_FILES = \
 	bin/kernel_entry.o \
@@ -6,12 +6,17 @@ OBJ_FILES = \
 	bin/utils.o \
 	bin/stdio.o \
 	bin/portio.o \
-	bin/vga.o
+	bin/idt.o \
+	bin/idt_asm.o \
+	bin/idtKey.o \
+	bin/font.o \
+	bin/stdlib.o
+#	bin/vga.o
 
 all:
 
 	nasm -f elf boot/kernel_entry.asm -o bin/kernel_entry.o
-
+	nasm -f elf kernel/idt/idt_asm.asm -o bin/idt_asm.o
 #kabak cekirdegini derle
 	i686-elf-gcc ${FLAGS} kernel/kernel.c -o bin/kernel.o
 
@@ -22,8 +27,13 @@ all:
 #kutuphaneleri derle	
 	i686-elf-gcc ${FLAGS} kernel/utils.c -o bin/utils.o
 	i686-elf-gcc ${FLAGS} kernel/stdio.c -o bin/stdio.o
+	i686-elf-gcc ${FLAGS} kernel/stdlib.c -o bin/stdlib.o
 	i686-elf-gcc ${FLAGS} kernel/portio.c -o bin/portio.o
-	i686-elf-gcc ${FLAGS} kernel/vga.c -o bin/vga.o
+
+	i686-elf-gcc ${FLAGS} kernel/idt/idt.c -o bin/idt.o
+	i686-elf-gcc ${FLAGS} kernel/idt/idtKey.c -o bin/idtKey.o
+	i686-elf-gcc ${FLAGS} kernel/font/font.c -o bin/font.o
+#i686-elf-gcc ${FLAGS} kernel/vga.c -o bin/vga.o
 
 	@echo ==================================
 	@echo ======LINKER======================
@@ -66,6 +76,8 @@ disam:
 	nasm -f bin boot/boot.asm -o bin/boot.bin
 	ndisasm bin/boot.bin > debug/boot.txt
 
+precomp:
+	i686-elf-gcc ${FLAGS} -S kernel/kernel.c
 
 #kel barkodlu temizlikci .o .bin temizler
 ifeq ($(OS),Windows_NT)

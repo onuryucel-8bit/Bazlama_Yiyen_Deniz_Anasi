@@ -1,6 +1,5 @@
 #include "stdio.h"
-#include "vga.h"
-
+#include "idt/idt.h"
 
 #define DEBUG_SERIAL_PORT
 
@@ -67,18 +66,17 @@
 
 void kernel_main()
 {
-    DEBUG_init();      
-    printf("Bazlama Yiyen Deniz Anasi\nAAAA\n");
+    DEBUG_init();
+    idt_init();
                
-    printf("hex(255) => %x\n", 255);        
-    printf("int(25) => %d\n", 25);  
+    printf("=========================\n");
+    printf("Bazlama Yiyen Deniz Anasi\n");
+    printf("=========================\n");   
+    
 
-    setbgColor(VGA_color_LightRed);
-    char str[] = "soba ustunde BAZLAMA, KETE ve cay hmmm";
-    printf("\n\n\n%s", str);
-           
     while(1)
     {
         __asm__("hlt");
     }
 }
+

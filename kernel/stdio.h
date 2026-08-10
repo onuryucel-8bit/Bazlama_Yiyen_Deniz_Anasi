@@ -5,11 +5,16 @@
 #include <stddef.h>
 #include <stdarg.h>
 
+#include "font/font.h"
 #include "utils.h"
 #include "portio.h"
+#include "stdlib.h"
 
 #define TTY_TEXT_MOD_WIDTH 80
 #define TTY_TEXT_MOD_HEIGHT 25
+
+#define WINDOW_WIDTH 320
+#define WINDOW_HEIGHT 200
 
 
 /*
@@ -90,7 +95,11 @@ void setfgColor(VGAColor color);
 VGAColor getfgColor();
 VGAColor getbgColor();
 
-
+void drawPixel(uint16_t x, uint16_t y, VGAColor color);
+void drawline(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, VGAColor color);
+void drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, VGAColor color);
+void drawRectangle(uint16_t x, uint16_t y, uint16_t width, uint16_t height, VGAColor color);
+void drawFilledRectangle(uint16_t x, uint16_t y, uint16_t width, uint16_t height, VGAColor color);
 
 static void print_char(uint8_t ch);
 static void print_int(uint32_t value);
